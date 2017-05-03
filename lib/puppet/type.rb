@@ -420,12 +420,10 @@ class Type
   # @api private
   #
   def self.title_patterns
-    case key_attributes.length
-    when 0; []
-    when 1;
-      [ [ /(.*)/m, [ [key_attributes.first] ] ] ]
+    if key_attributes.empty?
+      []
     else
-      raise Puppet::DevError,"you must specify title patterns when there are two or more key attributes"
+      [ [ /(.*)/m, [ [key_attributes.first] ] ] ]
     end
   end
 
